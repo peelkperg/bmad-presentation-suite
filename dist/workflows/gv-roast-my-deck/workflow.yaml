@@ -1,0 +1,25 @@
+# GV Roast My Deck Workflow Configuration
+name: "gv-roast-my-deck"
+description: "Critique an existing presentation and rebuild it around a clear message spine. Caravaggio identifies structural problems, message clarity failures, and visual logic issues — then rebuilds the deck for maximum impact."
+author: "BMad / Gerardo"
+
+# Critical variables from config
+config_source: "{project-root}/_bmad/cis/config.yaml"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+document_output_language: "{config_source}:document_output_language"
+date: system-generated
+
+# Module path
+installed_path: "{project-root}/_bmad/cis/workflows/gv-roast-my-deck"
+instructions: "{installed_path}/instructions.md"
+
+# Sidecar — loaded automatically if exists
+sidecar_path: "{project-root}/_bmad/_memory/caravaggio-sidecar/brand-profile.md"
+
+# Output configuration
+default_output_dir: "{output_folder}/presentations"
+
+standalone: true
+web_bundle: true

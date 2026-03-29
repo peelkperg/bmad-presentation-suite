@@ -1,0 +1,21 @@
+# GV Brand Profile Workflow Configuration
+name: "gv-brand-profile"
+description: "Set up or update Caravaggio's brand memory (the studio) for automatic brand consistency across all presentations."
+author: "BMad / Gerardo"
+
+# Critical variables from config
+config_source: "{project-root}/_bmad/cis/config.yaml"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+# Module path
+installed_path: "{project-root}/_bmad/cis/workflows/gv-brand-profile"
+instructions: "{installed_path}/instructions.md"
+
+# Sidecar path — persistent brand memory read by all Caravaggio workflows
+sidecar_path: "{project-root}/_bmad/_memory/caravaggio-sidecar/brand-profile.md"
+
+standalone: true
+web_bundle: true

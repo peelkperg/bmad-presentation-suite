@@ -1,0 +1,28 @@
+{
+  "name": "bmad-presentation-suite",
+  "version": "1.0.0",
+  "description": "BMAD Presentation Suite — message-first deck building and expert critique for BMAD CIS. Powered by Caravaggio.",
+  "keywords": [
+    "bmad",
+    "bmad-module",
+    "bmad-extension",
+    "presentation",
+    "slides",
+    "caravaggio",
+    "cis"
+  ],
+  "author": "Gerardo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/bmad-presentation-suite"
+  },
+  "bmad": {
+    "moduleCode": "cis",
+    "type": "extension",
+    "requires": ["cis"]
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

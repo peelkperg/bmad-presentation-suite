@@ -1,0 +1,5 @@
+# Development artifacts
+*.spec.md
+*.log
+.DS_Store
+node_modules/
