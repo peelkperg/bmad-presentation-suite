@@ -15,7 +15,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/bmad-presentation-suite"
+    "url": "git+https://github.com/peelkperg/bmad-presentation-suite.git"
   },
   "bmad": {
     "moduleCode": "cis",

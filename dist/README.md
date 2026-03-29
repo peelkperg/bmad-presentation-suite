@@ -27,9 +27,33 @@ Plus a persistent **Brand Studio** — store your brand profile once, apply it a
 
 ## Installation
 
-> **Note:** This package is currently distributed via GitHub only. npm publishing is planned for a future release.
+Two installation methods are available.
 
-### Step 1 — Download the package
+---
+
+### Method 1 — Install via npm (recommended)
+
+The simplest way. Requires BMAD platform and CIS module already installed.
+
+```bash
+bmad install bmad-presentation-suite
+```
+
+During installation you'll be asked:
+
+| Prompt | Default | Description |
+|--------|---------|-------------|
+| Enable presentation hook? | Yes | After any BMAD workflow, Caravaggio offers to turn the output into a presentation |
+
+That's it — the installer handles everything automatically.
+
+---
+
+### Method 2 — Manual install from GitHub
+
+Use this if you prefer to install directly from source or are not using the BMAD CLI installer.
+
+#### Step 1 — Download the package
 
 **Option A — Clone the repository:**
 ```bash
