@@ -27,15 +27,101 @@ Plus a persistent **Brand Studio** — store your brand profile once, apply it a
 
 ## Installation
 
+> **Note:** This package is currently distributed via GitHub only. npm publishing is planned for a future release.
+
+### Step 1 — Download the package
+
+**Option A — Clone the repository:**
 ```bash
-bmad install bmad-presentation-suite
+git clone https://github.com/peelkperg/bmad-presentation-suite.git
 ```
 
-During installation you'll be asked:
+**Option B — Download the zip:**
+Go to https://github.com/peelkperg/bmad-presentation-suite, click **Code → Download ZIP**, and extract it.
 
-| Prompt | Default | Description |
-|--------|---------|-------------|
-| Enable presentation hook? | Yes | After any BMAD workflow, Caravaggio offers to turn the output into a presentation |
+The installable files are inside the `dist/` folder.
+
+---
+
+### Step 2 — Copy the workflow and agent files
+
+From the `dist/` folder, copy into your BMAD project:
+
+| Source (`dist/`) | Destination (your project) |
+|---|---|
+| `agents/presentation-master.md` | `_bmad/cis/agents/presentation-master.md` |
+| `workflows/gv-brand-profile/` | `_bmad/cis/workflows/gv-brand-profile/` |
+| `workflows/gv-roast-my-deck/` | `_bmad/cis/workflows/gv-roast-my-deck/` |
+
+> The `agents/presentation-master.md` copy **overwrites** the existing CIS file — this is intentional. It adds the `[BP]` and `[RD]` menu commands to Caravaggio.
+
+---
+
+### Step 3 — Create the brand studio sidecar
+
+Create the directory `_bmad/_memory/caravaggio-sidecar/` in your project and add an empty file named `brand-profile.md` inside it with this content:
+
+```markdown
+# Caravaggio's Studio — Brand Profile
+
+*This file is empty. Run the [BP] Brand Profile workflow from Caravaggio's menu to set up your studio.*
+```
+
+---
+
+### Step 4 — Add the presentation hook flag to CIS config
+
+Open `_bmad/cis/config.yaml` and append:
+
+```yaml
+# Presentation Suite — post-workflow offer hook
+enable_presentation_hook: true
+```
+
+Set to `false` if you do not want the post-workflow presentation offer.
+
+---
+
+### Step 5 — Add the hook behavior to bmad-master
+
+Open `_bmad/_config/agents/core-bmad-master.customize.yaml` and update the `memories` field:
+
+```yaml
+memories:
+  - |
+    PRESENTATION HOOK (post-workflow offer):
+    After completing any document-producing workflow — specifically: create-prd, edit-prd,
+    create-product-brief, create-architecture, create-epics-and-stories, market-research,
+    domain-research, technical-research, brainstorming, design-thinking, innovation-strategy,
+    problem-solving, storytelling, retrospective, quick-spec, or generate-project-context —
+    silently check {project-root}/_bmad/cis/config.yaml for the field `enable_presentation_hook`.
+    If the field is present and set to `true`, append a single non-intrusive offer on a new line
+    after the workflow completion summary:
+    "🎨 Turn this into a presentation? → Type **[CP]** to launch Caravaggio."
+    If the user types CP (or "caravaggio" or "presentation"): activate the presentation-master
+    agent by reading {project-root}/_bmad/cis/agents/presentation-master.md.
+    Do NOT show this offer for implementation workflows: dev-story, code-review, create-story,
+    sprint-planning, sprint-status, correct-course, qa-automate, validate-*, or party-mode.
+```
+
+> If `memories` already has entries, append this block after the last existing entry.
+
+---
+
+### Step 6 — Register the workflows in the manifest
+
+Open `_bmad/_config/workflow-manifest.csv` and append these two lines:
+
+```
+"gv-brand-profile","Set up or update Caravaggio's brand memory (the studio) for automatic brand consistency across all presentations. Gathers colors, typography, tone, and visual constraints in a short conversational session.","cis","_bmad/cis/workflows/gv-brand-profile/workflow.yaml"
+"gv-roast-my-deck","Critique and rebuild an existing presentation around a clear message spine. Caravaggio identifies structural problems, message clarity failures, and visual logic issues — then rebuilds the deck for maximum impact.","cis","_bmad/cis/workflows/gv-roast-my-deck/workflow.yaml"
+```
+
+---
+
+### Installation complete
+
+Launch Caravaggio by invoking the `presentation-master` agent. You should see `[BP]` and `[RD]` in the menu.
 
 ---
 
